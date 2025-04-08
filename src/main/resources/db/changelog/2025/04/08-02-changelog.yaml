@@ -1,0 +1,146 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1744115829032-1
+      author: Anton
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_category
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: title
+                  type: VARCHAR(255)
+              - column:
+                  name: user_id
+                  type: UUID
+            tableName: category
+  - changeSet:
+      id: 1744115829032-2
+      author: Anton
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_status
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: title
+                  type: VARCHAR(255)
+              - column:
+                  name: user_id
+                  type: UUID
+            tableName: status
+  - changeSet:
+      id: 1744115829032-3
+      author: Anton
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_task
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: title
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: user_id
+                  type: UUID
+              - column:
+                  name: status_id
+                  type: UUID
+            tableName: task
+  - changeSet:
+      id: 1744115829032-4
+      author: Anton
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_user
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_name
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: password
+                  type: VARCHAR(255)
+            tableName: user
+  - changeSet:
+      id: 1744115829032-5
+      author: Anton
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: category
+            constraintName: FK_CATEGORY_ON_USER
+            referencedColumnNames: id
+            referencedTableName: user
+  - changeSet:
+      id: 1744115829032-6
+      author: Anton
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: status
+            constraintName: FK_STATUS_ON_USER
+            referencedColumnNames: id
+            referencedTableName: user
+  - changeSet:
+      id: 1744115829032-7
+      author: Anton
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: status_id
+            baseTableName: task
+            constraintName: FK_TASK_ON_STATUS
+            referencedColumnNames: id
+            referencedTableName: status
+  - changeSet:
+      id: 1744115829032-8
+      author: Anton
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: task
+            constraintName: FK_TASK_ON_USER
+            referencedColumnNames: id
+            referencedTableName: user
+
