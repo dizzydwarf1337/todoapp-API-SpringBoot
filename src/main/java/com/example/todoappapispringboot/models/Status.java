@@ -9,7 +9,6 @@ import java.util.UUID;
 @Table(name="statuses")
 public class Status {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(nullable = false)
@@ -21,6 +20,11 @@ public class Status {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+
+    public Status(){
+        this.id=UUID.randomUUID();
+    }
 
     public void setId(UUID id) {
         this.id = id;

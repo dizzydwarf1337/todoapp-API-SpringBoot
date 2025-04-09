@@ -2,6 +2,7 @@ package com.example.todoappapispringboot.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,7 +10,6 @@ import java.util.UUID;
 @Table(name = "categories")
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(nullable = false)
@@ -21,6 +21,14 @@ public class Category {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+
+
+    public Category(){
+        this.id=UUID.randomUUID();
+        this.tasks=new ArrayList<>();
+
+    }
 
     public void setId(UUID id) {
         this.id = id;
@@ -34,6 +42,13 @@ public class Category {
     }
     public String getTitle() {
         return title;
+    }
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public void setUser(User user) {

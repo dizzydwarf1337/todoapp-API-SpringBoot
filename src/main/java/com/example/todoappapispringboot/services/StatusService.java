@@ -2,6 +2,7 @@ package com.example.todoappapispringboot.services;
 
 import com.example.todoappapispringboot.dtos.Status.CreateStatusDto;
 import com.example.todoappapispringboot.dtos.Status.EditStatusDto;
+import com.example.todoappapispringboot.dtos.Status.StatusDto;
 import com.example.todoappapispringboot.models.Status;
 import com.example.todoappapispringboot.repositories.StatusRepository;
 import com.example.todoappapispringboot.repositories.UserRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class StatusService
@@ -20,17 +22,25 @@ public class StatusService
         this.statusRepository = statusRepository;
         this.userRepository = userRepository;
     }
-    public List<Status> GetStatusesByUserId(String userId){
-        UUID id = UUID.fromString(userId);
-        return statusRepository.GetStatusesByUserId(id);
+
+
+    public StatusDto GetStatusById(UUID statusId){
+        var status = statusRepository.findById(statusId).orElseThrow(()-> new RuntimeException("Status not found"));
+        return new StatusDto(status);
+    }
+
+    public List<StatusDto> GetStatusesByUserId(UUID userId) {
+        var user = userRepository.findById(userId).orElseThrow(()-> new RuntimeException("User not found"));
+        var statuses = statusRepository.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("Statuses not found"));
+        return statuses.stream().map(StatusDto::new).collect(Collectors.toList());
     }
     public void CreateStatus(CreateStatusDto createStatusDto) {
-        UUID id = UUID.randomUUID();
         var user = userRepository.findById(UUID.fromString(createStatusDto.getUserId())).orElseThrow();
         Status status = new Status();
-        status.setId(id);
         status.setTitle(createStatusDto.getTitle());
         status.setUser(user);
+        statusRepository.save(status);
     }
     public void DeleteStatus(UUID id) {
         var status = statusRepository.findById(id).orElseThrow();

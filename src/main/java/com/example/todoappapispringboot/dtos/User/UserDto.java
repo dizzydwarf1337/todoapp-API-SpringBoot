@@ -1,8 +1,6 @@
-package com.example.todoappapispringboot.dtos;
+package com.example.todoappapispringboot.dtos.User;
 
 import com.example.todoappapispringboot.models.User;
-
-import java.util.UUID;
 
 public class UserDto {
     private String id;

@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1744115739858-1
+      id: 1744186331533-1
       author: Anton
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -10,7 +10,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     primaryKey: true
-                    primaryKeyName: pk_category
+                    primaryKeyName: pk_categories
                   name: id
                   type: UUID
               - column:
@@ -21,9 +21,9 @@ databaseChangeLog:
               - column:
                   name: user_id
                   type: UUID
-            tableName: category
+            tableName: categories
   - changeSet:
-      id: 1744115739858-2
+      id: 1744186331533-2
       author: Anton
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -33,7 +33,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     primaryKey: true
-                    primaryKeyName: pk_status
+                    primaryKeyName: pk_statuses
                   name: id
                   type: UUID
               - column:
@@ -44,9 +44,27 @@ databaseChangeLog:
               - column:
                   name: user_id
                   type: UUID
-            tableName: status
+            tableName: statuses
   - changeSet:
-      id: 1744115739858-3
+      id: 1744186331533-3
+      author: Anton
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: category_id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: task_id
+                  type: UUID
+            tableName: task_category
+  - changeSet:
+      id: 1744186331533-4
       author: Anton
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -56,7 +74,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     primaryKey: true
-                    primaryKeyName: pk_task
+                    primaryKeyName: pk_tasks
                   name: id
                   type: UUID
               - column:
@@ -73,9 +91,9 @@ databaseChangeLog:
               - column:
                   name: status_id
                   type: UUID
-            tableName: task
+            tableName: tasks
   - changeSet:
-      id: 1744115739858-4
+      id: 1744186331533-5
       author: Anton
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -85,7 +103,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     primaryKey: true
-                    primaryKeyName: pk_user
+                    primaryKeyName: pk_users
                   name: id
                   type: UUID
               - column:
@@ -98,51 +116,80 @@ databaseChangeLog:
                     nullable: false
                   name: password
                   type: VARCHAR(255)
-            tableName: user
+            tableName: users
   - changeSet:
-      id: 1744115739858-5
+      id: 1744186331533-6
+      author: Anton
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: user_name
+            constraintName: uc_users_username
+            tableName: users
+  - changeSet:
+      id: 1744186331533-7
       author: Anton
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - addForeignKeyConstraint:
             baseColumnNames: user_id
-            baseTableName: category
-            constraintName: FK_CATEGORY_ON_USER
+            baseTableName: categories
+            constraintName: FK_CATEGORIES_ON_USER
             referencedColumnNames: id
-            referencedTableName: user
+            referencedTableName: users
   - changeSet:
-      id: 1744115739858-6
+      id: 1744186331533-8
       author: Anton
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - addForeignKeyConstraint:
             baseColumnNames: user_id
-            baseTableName: status
-            constraintName: FK_STATUS_ON_USER
+            baseTableName: statuses
+            constraintName: FK_STATUSES_ON_USER
             referencedColumnNames: id
-            referencedTableName: user
+            referencedTableName: users
   - changeSet:
-      id: 1744115739858-7
+      id: 1744186331533-9
       author: Anton
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - addForeignKeyConstraint:
             baseColumnNames: status_id
-            baseTableName: task
-            constraintName: FK_TASK_ON_STATUS
+            baseTableName: tasks
+            constraintName: FK_TASKS_ON_STATUS
             referencedColumnNames: id
-            referencedTableName: status
+            referencedTableName: statuses
   - changeSet:
-      id: 1744115739858-8
+      id: 1744186331533-10
       author: Anton
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - addForeignKeyConstraint:
             baseColumnNames: user_id
-            baseTableName: task
-            constraintName: FK_TASK_ON_USER
+            baseTableName: tasks
+            constraintName: FK_TASKS_ON_USER
             referencedColumnNames: id
-            referencedTableName: user
-  - include:
-      file: db/changelog/2025/04/09-01-changelog.yaml
+            referencedTableName: users
+  - changeSet:
+      id: 1744186331533-11
+      author: Anton
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: category_id
+            baseTableName: task_category
+            constraintName: fk_tascat_on_category
+            referencedColumnNames: id
+            referencedTableName: categories
+  - changeSet:
+      id: 1744186331533-12
+      author: Anton
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: task_id
+            baseTableName: task_category
+            constraintName: fk_tascat_on_task
+            referencedColumnNames: id
+            referencedTableName: tasks
 

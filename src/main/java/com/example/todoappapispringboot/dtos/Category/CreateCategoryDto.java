@@ -1,14 +1,14 @@
 package com.example.todoappapispringboot.dtos.Category;
 
 public class CreateCategoryDto {
-    private String categoryName;
+    private String title;
     private String userId;
 
 
-    public String getName(){
-        return categoryName;
+    public String getTitle(){
+        return this.title;
     }
     public String getUserId(){
-        return userId;
+        return this.userId;
     }
 }
