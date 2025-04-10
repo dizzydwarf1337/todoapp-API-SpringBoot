@@ -4,7 +4,6 @@ import com.example.todoappapispringboot.dtos.ApiResponse;
 import com.example.todoappapispringboot.dtos.Category.CategoryDto;
 import com.example.todoappapispringboot.dtos.Category.CreateCategoryDto;
 import com.example.todoappapispringboot.dtos.Category.EditCategoryDto;
-import com.example.todoappapispringboot.dtos.DeleteId;
 import com.example.todoappapispringboot.services.CategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,10 +52,10 @@ public class CategoryController extends BaseController{
             return handleResponse(ApiResponse.failure(e.getMessage()));
         }
     }
-    @DeleteMapping("/delete")
-    public ResponseEntity<ApiResponse<String>> DeleteCategory(@RequestBody DeleteId categoryId){
+    @DeleteMapping("/delete/{categoryId}")
+    public ResponseEntity<ApiResponse<String>> DeleteCategory(@PathVariable String categoryId){
         try{
-            categoryService.DeleteCategory(UUID.fromString(categoryId.getId()));
+            categoryService.DeleteCategory(UUID.fromString(categoryId));
             return handleResponse(ApiResponse.success("Category deleted successfully"));
         }
         catch (Exception e) {

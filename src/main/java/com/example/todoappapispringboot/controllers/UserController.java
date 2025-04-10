@@ -2,12 +2,8 @@ package com.example.todoappapispringboot.controllers;
 
 
 import com.example.todoappapispringboot.dtos.ApiResponse;
-import com.example.todoappapispringboot.dtos.DeleteId;
 import com.example.todoappapispringboot.dtos.User.SimpleUserDto;
-import com.example.todoappapispringboot.dtos.User.UserDto;
-import com.example.todoappapispringboot.repositories.UserRepository;
 import com.example.todoappapispringboot.services.UserService;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,10 +32,10 @@ public class UserController extends BaseController{
 
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<ApiResponse<String>> DeleteUser(@RequestBody DeleteId userId){
+    @DeleteMapping("/delete/{userId}")
+    public ResponseEntity<ApiResponse<String>> DeleteUser(@PathVariable String userId){
         try{
-            userService.DeleteUser(userId);
+            userService.DeleteUser(UUID.fromString(userId));
             return handleResponse(ApiResponse.success("User deleted successfully"));
         }
         catch (Exception e){

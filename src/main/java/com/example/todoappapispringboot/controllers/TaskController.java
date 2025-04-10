@@ -1,8 +1,6 @@
 package com.example.todoappapispringboot.controllers;
 
 import com.example.todoappapispringboot.dtos.ApiResponse;
-import com.example.todoappapispringboot.dtos.DeleteId;
-import com.example.todoappapispringboot.dtos.Status.EditStatusDto;
 import com.example.todoappapispringboot.dtos.Task.*;
 import com.example.todoappapispringboot.services.TaskService;
 import org.springframework.http.ResponseEntity;
@@ -53,10 +51,10 @@ public class TaskController extends BaseController {
         }
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<ApiResponse<String>> DeleteTask(@RequestBody DeleteId taskId) {
+    @DeleteMapping("/delete/{taskId}")
+    public ResponseEntity<ApiResponse<String>> DeleteTask(@PathVariable String taskId) {
         try{
-            taskService.DeleteTask(UUID.fromString(taskId.getId()));
+            taskService.DeleteTask(UUID.fromString(taskId));
             return handleResponse(ApiResponse.success("Task deleted"));
         }
         catch (Exception e){

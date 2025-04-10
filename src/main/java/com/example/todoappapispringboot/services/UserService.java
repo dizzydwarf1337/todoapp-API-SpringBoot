@@ -1,10 +1,8 @@
 package com.example.todoappapispringboot.services;
 
 
-import com.example.todoappapispringboot.dtos.DeleteId;
 import com.example.todoappapispringboot.dtos.User.EditUserNameDto;
 import com.example.todoappapispringboot.dtos.User.SimpleUserDto;
-import com.example.todoappapispringboot.dtos.User.UserDto;
 import com.example.todoappapispringboot.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +34,8 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void DeleteUser(DeleteId userId){
-        var user = userRepository.findById(UUID.fromString(userId.getId())).orElseThrow(()->new RuntimeException("User not found"));
+    public void DeleteUser(UUID userId){
+        var user = userRepository.findById(userId).orElseThrow(()->new RuntimeException("User not found"));
         userRepository.delete(user);
     }
 

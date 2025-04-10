@@ -1,12 +1,10 @@
 package com.example.todoappapispringboot.controllers;
 
 import com.example.todoappapispringboot.dtos.ApiResponse;
-import com.example.todoappapispringboot.dtos.DeleteId;
 import com.example.todoappapispringboot.dtos.Status.CreateStatusDto;
 import com.example.todoappapispringboot.dtos.Status.EditStatusDto;
 import com.example.todoappapispringboot.dtos.Status.StatusDto;
 import com.example.todoappapispringboot.services.StatusService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,10 +53,10 @@ public class StatusController extends BaseController {
             return handleResponse(ApiResponse.failure(e.getMessage()));
         }
     }
-    @DeleteMapping("/delete")
-    public ResponseEntity<ApiResponse<String>> DeleteStatus(@RequestBody DeleteId statusId) {
+    @DeleteMapping("/delete/{statusId}")
+    public ResponseEntity<ApiResponse<String>> DeleteStatus(@PathVariable String statusId) {
         try{
-            statusService.DeleteStatus(UUID.fromString(statusId.getId()));
+            statusService.DeleteStatus(UUID.fromString(statusId));
             return handleResponse(ApiResponse.success("Status deleted successfully"));
         }
         catch (Exception e){
