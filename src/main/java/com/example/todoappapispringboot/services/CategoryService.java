@@ -33,7 +33,7 @@ public class CategoryService {
         var categories =  categoryRepository.findByUserId(userId).orElseThrow(()-> new RuntimeException("Category not found"));
         return categories.stream().map(CategoryDto::new).collect(Collectors.toList());
     }
-    public void AddCategory(CreateCategoryDto createCategoryDto){
+    public Category AddCategory(CreateCategoryDto createCategoryDto){
         User user = userRepository.findById(UUID.fromString(createCategoryDto.getUserId()))
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + createCategoryDto.getUserId()));
         var categories = categoryRepository.findByUserId(UUID.fromString(createCategoryDto.getUserId())).orElseThrow(()-> new RuntimeException("Category not found"));
@@ -44,6 +44,7 @@ public class CategoryService {
         category.setTitle(createCategoryDto.getTitle());
         category.setUser(user);
         categoryRepository.save(category);
+        return category;
     }
     public void DeleteCategory(UUID categoryId){
         categoryRepository.deleteById(categoryId);

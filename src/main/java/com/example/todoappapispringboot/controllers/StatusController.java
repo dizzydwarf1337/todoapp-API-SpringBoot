@@ -44,10 +44,10 @@ public class StatusController extends BaseController {
         }
     }
     @PostMapping("/create")
-    public ResponseEntity<ApiResponse<String>> CreateStatus(@RequestBody CreateStatusDto createStatusDto) {
+    public ResponseEntity<ApiResponse<StatusDto>> CreateStatus(@RequestBody CreateStatusDto createStatusDto) {
         try{
-            statusService.CreateStatus(createStatusDto);
-            return handleResponse(ApiResponse.success("Status created successfully"));
+            var status = statusService.CreateStatus(createStatusDto);
+            return handleResponse(ApiResponse.success(new StatusDto(status)));
         }
         catch (Exception e){
             return handleResponse(ApiResponse.failure(e.getMessage()));

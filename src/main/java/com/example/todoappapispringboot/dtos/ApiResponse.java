@@ -1,29 +1,33 @@
 package com.example.todoappapispringboot.dtos;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ApiResponse<T> {
 
+    @JsonProperty("isSuccess")
     private boolean isSuccess;
     private T value;
     private String error;
 
     public static <T> ApiResponse<T> success(T value) {
         ApiResponse<T> response = new ApiResponse<>();
-        response.setSuccess(true);
+        response.setIsSuccess(true);
         response.setValue(value);
         return response;
     }
 
     public static <T> ApiResponse<T> failure(String error) {
         ApiResponse<T> response = new ApiResponse<>();
-        response.setSuccess(false);
+        response.setIsSuccess(false);
         response.setError(error);
         return response;
     }
 
-    public boolean isSuccess() {
+    public boolean getIsSuccess() {
         return isSuccess;
     }
 
-    public void setSuccess(boolean success) {
+    public void setIsSuccess(boolean success) {
         isSuccess = success;
     }
 

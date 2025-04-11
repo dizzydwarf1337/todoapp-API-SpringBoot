@@ -43,10 +43,10 @@ public class CategoryController extends BaseController{
         }
     }
     @PostMapping("/create")
-    public ResponseEntity<ApiResponse<String>> CreateCategory(@RequestBody CreateCategoryDto categoryDto) {
+    public ResponseEntity<ApiResponse<CategoryDto>> CreateCategory(@RequestBody CreateCategoryDto categoryDto) {
         try{
-            categoryService.AddCategory(categoryDto);
-            return handleResponse(ApiResponse.success("Category created"));
+            var category = categoryService.AddCategory(categoryDto);
+            return handleResponse(ApiResponse.success(new CategoryDto(category)));
         }
         catch(Exception e){
             return handleResponse(ApiResponse.failure(e.getMessage()));

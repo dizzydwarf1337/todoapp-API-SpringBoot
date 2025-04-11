@@ -2,6 +2,7 @@ package com.example.todoappapispringboot.controllers;
 
 import com.example.todoappapispringboot.dtos.ApiResponse;
 import com.example.todoappapispringboot.dtos.Task.*;
+import com.example.todoappapispringboot.models.Task;
 import com.example.todoappapispringboot.services.TaskService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,10 +42,10 @@ public class TaskController extends BaseController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ApiResponse<String>> CreateTask(@RequestBody CreateTaskDto createTaskDto){
+    public ResponseEntity<ApiResponse<TaskDto>> CreateTask(@RequestBody CreateTaskDto createTaskDto){
         try{
-            taskService.CreateTask(createTaskDto);
-            return handleResponse(ApiResponse.success("Task created"));
+            var task = taskService.CreateTask(createTaskDto);
+            return handleResponse(ApiResponse.success(new TaskDto(task)));
         }
         catch (Exception e){
             return handleResponse(ApiResponse.failure(e.getMessage()));

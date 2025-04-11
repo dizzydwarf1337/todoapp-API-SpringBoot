@@ -35,12 +35,13 @@ public class StatusService
                 .orElseThrow(() -> new RuntimeException("Statuses not found"));
         return statuses.stream().map(StatusDto::new).collect(Collectors.toList());
     }
-    public void CreateStatus(CreateStatusDto createStatusDto) {
+    public Status CreateStatus(CreateStatusDto createStatusDto) {
         var user = userRepository.findById(UUID.fromString(createStatusDto.getUserId())).orElseThrow();
         Status status = new Status();
         status.setTitle(createStatusDto.getTitle());
         status.setUser(user);
         statusRepository.save(status);
+        return status;
     }
     public void DeleteStatus(UUID id) {
         var status = statusRepository.findById(id).orElseThrow();

@@ -44,7 +44,7 @@ public class TaskService {
         return taskDtos;
     }
 
-    public void CreateTask(CreateTaskDto createTaskDto){
+    public Task CreateTask(CreateTaskDto createTaskDto){
         var user = userRepository.findById(UUID.fromString(createTaskDto.getUserId()))
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -62,6 +62,7 @@ public class TaskService {
         task.setStatus(status);
         task.setDescription(createTaskDto.getDescription());
         taskRepository.save(task);
+        return task;
     }
 
     public void DeleteTask(UUID taskId){

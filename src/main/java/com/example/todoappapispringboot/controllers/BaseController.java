@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BaseController {
 
     protected <T> ResponseEntity<ApiResponse<T>> handleResponse(ApiResponse<T> result) {
-        if (!result.isSuccess()) {
+        if (!result.getIsSuccess()) {
             return ResponseEntity.badRequest().body(result);
         }
         return ResponseEntity.ok(result);
