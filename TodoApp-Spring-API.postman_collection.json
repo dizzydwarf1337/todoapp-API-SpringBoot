@@ -18,7 +18,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/categories/user/5fdfc7a0-109e-41d5-8299-ae5c4fdacaac",
+							"raw": "http://localhost:5000/api/categories/user/b189e014-d435-41cb-843b-c6e5afe7165b",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -28,7 +28,7 @@
 								"api",
 								"categories",
 								"user",
-								"5fdfc7a0-109e-41d5-8299-ae5c4fdacaac"
+								"b189e014-d435-41cb-843b-c6e5afe7165b"
 							]
 						}
 					},
@@ -40,7 +40,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/categories/538568c5-a671-45b2-8b98-13b1e3a01800",
+							"raw": "http://localhost:5000/api/categories/7a909780-cf2f-45f7-b46c-a455978ecea2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -49,7 +49,7 @@
 							"path": [
 								"api",
 								"categories",
-								"538568c5-a671-45b2-8b98-13b1e3a01800"
+								"7a909780-cf2f-45f7-b46c-a455978ecea2"
 							]
 						}
 					},
@@ -97,7 +97,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/categories/delete/fe43f670-4ed3-4165-baa0-473cb62a28e4",
+							"raw": "http://localhost:5000/api/categories/delete/8a56b440-23e9-47ec-966b-bf0eea04bf48",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -107,7 +107,7 @@
 								"api",
 								"categories",
 								"delete",
-								"fe43f670-4ed3-4165-baa0-473cb62a28e4"
+								"8a56b440-23e9-47ec-966b-bf0eea04bf48"
 							]
 						}
 					},
@@ -155,12 +155,26 @@
 					"name": "GetStatusesByUserId",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb3VyVXNlck5hbWUiLCJpYXQiOjE3NDQ1NjcxOTcsImV4cCI6MTc0NDU3MDc5N30.tvuu0sYnifZaUL2SLfxxXUU4beyBZxwP_Ez7ydXGIDU",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZb3VyVXNlck5hbWUiLCJpYXQiOjE3NDQ1NjM5NjAsImV4cCI6MTc0NDU2NzU2MH0.eTrN8abd1EGZ4x-YPLliJnV2osgiZZ0PxwcvWNPReug",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"url": {
-							"raw": "http://localhost:5000/api/statuses/user/5fdfc7a0-109e-41d5-8299-ae5c4fdacaac",
+							"raw": "http://localhost:5000/api/statuses/user/b189e014-d435-41cb-843b-c6e5afe7165b",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -170,7 +184,7 @@
 								"api",
 								"statuses",
 								"user",
-								"5fdfc7a0-109e-41d5-8299-ae5c4fdacaac"
+								"b189e014-d435-41cb-843b-c6e5afe7165b"
 							]
 						}
 					},
@@ -198,7 +212,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:5000/api/statuses/b5c9bb25-dd25-4bd5-afc0-cec525e73ba0",
+							"raw": "http://localhost:5000/api/statuses/6a7d9729-21aa-4d42-b231-14ae942c048b",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -207,7 +221,7 @@
 							"path": [
 								"api",
 								"statuses",
-								"b5c9bb25-dd25-4bd5-afc0-cec525e73ba0"
+								"6a7d9729-21aa-4d42-b231-14ae942c048b"
 							]
 						}
 					},
@@ -223,7 +237,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\":\"New status\",\r\n    \"userId\":\"c9c85d6c-8de0-4d25-9a76-771f685830ec\"\r\n}",
+							"raw": "{\r\n    \"title\":\"New status\",\r\n    \"userId\":\"b189e014-d435-41cb-843b-c6e5afe7165b\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -319,7 +333,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"NewUser\",\r\n    \"password\":\"YourPassword\"\r\n}",
+							"raw": "{\r\n    \"username\":\"YourUserName\",\r\n    \"password\":\"YourPassword\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -388,7 +402,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/tasks/9e406b2d-b2fe-477a-9206-c69d59ab0d55",
+							"raw": "http://localhost:5000/api/tasks/b189e014-d435-41cb-843b-c6e5afe7165b",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -397,7 +411,7 @@
 							"path": [
 								"api",
 								"tasks",
-								"9e406b2d-b2fe-477a-9206-c69d59ab0d55"
+								"b189e014-d435-41cb-843b-c6e5afe7165b"
 							]
 						}
 					},
@@ -578,7 +592,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/users/delete/5fdfc7a0-109e-41d5-8299-ae5c4fdacaac",
+							"raw": "http://localhost:5000/api/users/delete/84dcf4f5-a069-438b-9fad-a0921ffc51bb",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -588,7 +602,7 @@
 								"api",
 								"users",
 								"delete",
-								"5fdfc7a0-109e-41d5-8299-ae5c4fdacaac"
+								"84dcf4f5-a069-438b-9fad-a0921ffc51bb"
 							]
 						}
 					},
