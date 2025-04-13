@@ -4,9 +4,11 @@ import com.example.todoappapispringboot.dtos.Category.CategoryDto;
 import com.example.todoappapispringboot.dtos.Category.CreateCategoryDto;
 import com.example.todoappapispringboot.dtos.Category.EditCategoryDto;
 import com.example.todoappapispringboot.models.Category;
+import com.example.todoappapispringboot.models.Task;
 import com.example.todoappapispringboot.models.User;
 import com.example.todoappapispringboot.repositories.CategoryRepository;
 import com.example.todoappapispringboot.repositories.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,7 +49,13 @@ public class CategoryService {
         return category;
     }
     public void DeleteCategory(UUID categoryId){
-        categoryRepository.deleteById(categoryId);
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new EntityNotFoundException("Category not found"));
+        for (Task task : category.getTasks()) {
+            task.getCategories().remove(category);
+        }
+        category.getTasks().clear();
+        categoryRepository.delete(category);
     }
 
 
